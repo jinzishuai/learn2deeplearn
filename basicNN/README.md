@@ -2,7 +2,7 @@
 
 This is the same problem described by [this reference blog](http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/).
 
-**Objective**: train a Machine Learning **classifier** that predicts the correct class (male/female or 0/1) given the x- and y- coordinates.
+**Objective**: train a Machine Learning **classifier** that predicts the correct class (male (1) or female (0)) given the x- and y- coordinates.
 
 # References
 
