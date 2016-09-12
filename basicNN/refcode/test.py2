@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 __author__ = 'm.bashari'
 import numpy as np
 from sklearn import datasets, linear_model
@@ -74,7 +75,7 @@ def predict(model, x):
 # - nn_hdim: Number of nodes in the hidden layer
 # - num_passes: Number of passes through the training data for gradient descent
 # - print_loss: If True, print the loss every 1000 iterations
-def build_model(X, y, nn_hdim, num_passes=20000, print_loss=False):
+def build_model(X, y, nn_hdim, num_passes=2001, print_loss=False):
     # Initialize the parameters to random values. We need to learn these.
     num_examples = len(X)
     np.random.seed(0)

@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 __author__ = 'm.bashari'
 import numpy as np
 from sklearn import datasets, linear_model

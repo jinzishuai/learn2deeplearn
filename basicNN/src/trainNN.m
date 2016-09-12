@@ -17,12 +17,14 @@ reg_lambda = 0.01; # regularization strength
 
 #Parameters to tweak
 nn_hdim = 3;
-num_passes = 2000; #20000;
+num_passes = 19999; #20000;
 
 #Initialize parameters to random numbers
-W1=randn(nn_input_dim, nn_hdim)/ sqrt(nn_input_dim); #dimension nn_input_dim x nn_hdim
+#W1=randn(nn_input_dim, nn_hdim)/ sqrt(nn_input_dim); #dimension nn_input_dim x nn_hdim
+#W2=randn(nn_hdim, nn_output_dim) /sqrt(nn_hdim); #dimension nn_hdim x nn_output_dim
+W1=load('initW1.dat');
+W2=load('initW2.dat');
 b1=zeros(1, nn_hdim); #dimension 1 x nn_hdim
-W2=randn(nn_hdim, nn_output_dim) /sqrt(nn_hdim); #dimension nn_hdim x nn_output_dim
 b2=zeros(1, nn_output_dim); #dimension 1 x nn_output_dim
 
 for i=0:num_passes
@@ -31,15 +33,7 @@ for i=0:num_passes
     a1 = tanh(z1); #dimension num_examples x nn_hdim
     z2 = a1*W2 + repmat(b2, num_examples,1); #dimension num_examples x nn_output_dim
     probs = softmax(z2);  #dimension num_examples x nn_output_dim
-    #Calculate the loss
-    #Question: how does this work here to calculate the cross entropy loss
-    corect_logprobs =  - log( probs);
-    data_loss = sum(sum(corect_logprobs)); #scalar
-    data_loss += reg_lambda/2 * ( sum(sum(W1.^2)) + sum(sum(W2.^2)) );
-    data_loss /= num_examples;
-    if mod(i,1000) == 0
-        printf("iteration %d, data_loss=%f\n",i, data_loss);
-    end
+    
     
     
     # Backward progagation
@@ -62,5 +56,11 @@ for i=0:num_passes
     b1 += -epsilon * db1;
     W2 += -epsilon * dW2;
     b2 += -epsilon * db2;
+    
+    
+    if mod(i,1000) == 0
+        data_loss = calculate_loss(X, W1, W2, b1, b2,yy,reg_lambda);
+        printf("iteration %d, data_loss=%f\n",i, data_loss);
+    end
 end 
 
