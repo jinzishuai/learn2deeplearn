@@ -63,4 +63,4 @@ for i=0:num_passes
         printf("iteration %d, data_loss=%f\n",i, data_loss);
     end
 end 
-
+save final.mat W1 W2 b1 b2
