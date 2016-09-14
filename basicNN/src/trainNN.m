@@ -20,10 +20,10 @@ nn_hdim = 3;
 num_passes = 19999; #20000;
 
 #Initialize parameters to random numbers
-#W1=randn(nn_input_dim, nn_hdim)/ sqrt(nn_input_dim); #dimension nn_input_dim x nn_hdim
-#W2=randn(nn_hdim, nn_output_dim) /sqrt(nn_hdim); #dimension nn_hdim x nn_output_dim
-W1=load('initW1.dat');
-W2=load('initW2.dat');
+W1=randn(nn_input_dim, nn_hdim)/ sqrt(nn_input_dim); #dimension nn_input_dim x nn_hdim
+W2=randn(nn_hdim, nn_output_dim) /sqrt(nn_hdim); #dimension nn_hdim x nn_output_dim
+#W1=load('initW1.dat');
+#W2=load('initW2.dat');
 b1=zeros(1, nn_hdim); #dimension 1 x nn_hdim
 b2=zeros(1, nn_output_dim); #dimension 1 x nn_output_dim
 
@@ -64,3 +64,4 @@ for i=0:num_passes
     end
 end 
 save final.mat W1 W2 b1 b2
+predict
