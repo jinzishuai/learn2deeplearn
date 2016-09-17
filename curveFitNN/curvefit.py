@@ -11,11 +11,11 @@ class Config:
     # Gradient descent parameters (I picked these by hand)
     epsilon = 0.00001  # learning rate for gradient descent
     reg_lambda = 0.001 #0.01  # regularization strength
-    maxX=5;
+    maxX=3;
 
 def func(x):
-    #return x**3
-    return np.sin(x)
+    return x**3+x**2+x
+    #return np.sin(x)
     
 def generate_data():
     np.random.seed(0)
