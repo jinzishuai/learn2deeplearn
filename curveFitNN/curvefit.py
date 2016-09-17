@@ -9,12 +9,13 @@ class Config:
     nn_input_dim = 1  # input layer dimensionality
     nn_output_dim = 1  # output layer dimensionality
     # Gradient descent parameters (I picked these by hand)
-    epsilon = 0.01  # learning rate for gradient descent
-    reg_lambda = 0.01 #0.01  # regularization strength
-    maxX=1;
+    epsilon = 0.00001  # learning rate for gradient descent
+    reg_lambda = 0.001 #0.01  # regularization strength
+    maxX=5;
 
 def func(x):
-    return x**3
+    #return x**3
+    return np.sin(x)
     
 def generate_data():
     np.random.seed(0)
@@ -117,7 +118,7 @@ def build_model(x, y, nn_hdim, num_passes=10000, print_loss=False):
 
 def main():
     x, y = generate_data()
-    model = build_model(x, y, 3,num_passes=20000,  print_loss=True)
+    model = build_model(x, y, 3,num_passes=200000,  print_loss=True)
     visualize(x, y, model)
 
 
