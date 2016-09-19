@@ -9,11 +9,12 @@ class Config:
     nn_input_dim = 1  # input layer dimensionality
     nn_output_dim = 1  # output layer dimensionality
     # Gradient descent parameters (I picked these by hand)
-    epsilon = 0.00001  # learning rate for gradient descent
-    reg_lambda = 0.001 #0.01  # regularization strength
-    maxX=3;
+    epsilon = 0.001  # learning rate for gradient descent
+    reg_lambda = 0 #0.01  # regularization strength
+    maxX=1;
 
 def func(x):
+    #return x**3
     return x**3+x**2+x
     #return np.sin(x)
     
@@ -30,7 +31,7 @@ def visualize(x, y, model):
     sx = np.linspace(-Config.maxX, Config.maxX, num=1000)
     sy = func(sx)
     plt.plot(sx,sy)
-    #print model
+    print model
     px = np.matrix(sx).T
     py = predict(model,px)
     plt.plot(px, py, 'r-')
@@ -111,14 +112,14 @@ def build_model(x, y, nn_hdim, num_passes=10000, print_loss=False):
 
         # Optionally print the loss.
         # This is expensive because it uses the whole dataset, so we don't want to do it too often.
-        if print_loss and i % 1000 == 0:
+        if print_loss and i % 10000 == 0:
             print("Loss after iteration %i: %f" % (i, calculate_loss(model, x, y)))
 
     return model
 
 def main():
     x, y = generate_data()
-    model = build_model(x, y, 3,num_passes=200000,  print_loss=True)
+    model = build_model(x, y, 1,num_passes=200000,  print_loss=True)
     visualize(x, y, model)
 
 
