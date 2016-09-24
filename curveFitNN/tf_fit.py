@@ -14,7 +14,9 @@ W2 = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
 b2 = tf.Variable(tf.zeros([1]))
 
 z1 = W1 * x_data + b1
-a1 = tf.tanh(z1)
+#for a list of available tensor flow activation function, see https://www.tensorflow.org/versions/r0.10/api_docs/python/nn.html
+#a1 = tf.tanh(z1)
+a1 = tf.sigmoid(z1)
 z1 = a1 * W2 + b2
 y = z1
 
