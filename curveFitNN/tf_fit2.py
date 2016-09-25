@@ -10,7 +10,7 @@ sess = tf.InteractiveSession()
 ## define the dimensions
 nn_input_dim = 1 
 nn_output_dim = 1
-nn_hdim = 1 #Hidden node dimension
+nn_hdim = 3 #Hidden node dimension
 # Create 100 phony x, y data points in NumPy, y = x * 0.1 + 0.3
 num_examples = 100
 
@@ -51,6 +51,9 @@ for step in range(NSteps+1):
 #correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
 #accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 #print(accuracy.eval({x: mnist.test.images, y_: mnist.test.labels})
-x_test = np.linspace(0.0,  1.0,  1000).reshape(1000, 1)
+x_test = np.linspace(-1.0,  1.0,  1000).reshape(1000, 1)
+y_test = x_test**3 + x_test**2 + x_test
+
+plt.plot(x_test,  y_test,  'g-')
 plt.plot(x_test,  y.eval({x:x_test}) ,  'b-')
 plt.show()
