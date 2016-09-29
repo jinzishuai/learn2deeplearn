@@ -29,8 +29,15 @@ b2 = tf.Variable(tf.zeros([nn_output_dim]))
 ## define forward propogation
 z1 = tf.matmul(x, W1) + b1
 #for a list of available tensor flow activation function, see https://www.tensorflow.org/versions/r0.10/api_docs/python/nn.html
-#a1 = tf.tanh(z1)
-a1 = tf.sigmoid(z1)
+#a1 = tf.tanh(z1)    #bad
+a1 = tf.sigmoid(z1) #good
+#a1 = tf.nn.relu(z1) #bad
+#a1 = tf.nn.relu6(z1)#bad
+#a1 = tf.nn.elu(z1)  #bad
+#a1 = tf.nn.softplus(z1)   #good
+#a1 = tf.nn.softsign(z1)   #bad
+#a1 = tf.nn.dropout(z1, 0.1)   #bad
+
 y = tf.matmul(a1, W2) + b2
 ## Define loss and optimizer
 # Minimize the mean squared errors.
