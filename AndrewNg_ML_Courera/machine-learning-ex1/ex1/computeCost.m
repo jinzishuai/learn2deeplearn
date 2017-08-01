@@ -14,7 +14,14 @@ J = 0;
 %               You should set J to the cost.
 
 
+% X: m x (n+1)
+% y: m x 1
+% h: m x 1
+% theta: (n+1) x 1
 
+h = X * theta;
+diff = h- y;
+J = 1/(2*m)*sumsq(diff);
 
 
 % =========================================================================

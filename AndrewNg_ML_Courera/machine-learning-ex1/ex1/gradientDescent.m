@@ -17,11 +17,12 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-
-
-
-
-
+    % X: m x (n+1)
+    % y: m x 1
+    % diff: m x 1
+    % theta: (n+1) x 1
+    diff = X*theta - y;
+    theta = theta - alpha/m * (X'*diff); % (n+1) x 1
 
     % ============================================================
 
