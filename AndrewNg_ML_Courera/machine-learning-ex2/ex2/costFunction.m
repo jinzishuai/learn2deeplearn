@@ -20,11 +20,20 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+% theta: (n+1) x 1
+% X: m x (n+1)
+% y: m x 1
+% J: 1 x 1 (scalar)
+% grad: (n+1) x 1
 
+% jVec, h, y: m x 1
+jVec=zeros(m);
+h=zeros(m);
+h=sigmoid(X*theta);
+jVec=- y.*log(h)- (1-y).*log(1-h); 
+J = mean(jVec); 
 
-
-
-
+grad= 1/m*X'*(h-y);
 
 
 % =============================================================

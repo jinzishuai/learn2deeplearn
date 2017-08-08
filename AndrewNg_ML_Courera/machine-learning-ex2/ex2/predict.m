@@ -17,8 +17,12 @@ p = zeros(m, 1);
 
 
 
-
-
+h=zeros(m);
+h=sigmoid(X*theta);
+passed=find(h>=0.5);
+failed=find(h<0.5);
+p(passed)=1;
+p(failed)=0;
 
 
 % =========================================================================
