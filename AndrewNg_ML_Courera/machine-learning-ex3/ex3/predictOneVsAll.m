@@ -30,8 +30,11 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
+% X: m x (n+1) where n is the number of pixels of image (400 in this case)
+% all_theta: num_labels (10 here, aka K) x (n+1)
+% h: prediction: m x all_theta. each row is a vector valued of 0 or 1
+h=sigmoid(X*all_theta');
+[alwayOne, p]=max(h, [], 2);
 
 
 
