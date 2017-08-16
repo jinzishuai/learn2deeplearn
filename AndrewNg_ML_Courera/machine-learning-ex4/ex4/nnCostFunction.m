@@ -26,7 +26,7 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 m = size(X, 1);
          
 % You need to return the following variables correctly 
-J = 0;
+J = 0; % Scalar
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
@@ -63,16 +63,54 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% Theta1: hidden_layer_size x (input_layer_size + 1), eg, 25 x 401
+% Theta2: num_labels x (hidden_layer_size + 1), eg, 10 x 26
+% X: 5000 x 400
+% y: 5000 x 1
 
 
+% As mentioned in lecture 9, we should loop through all sample data. 
+% In fact, this part can be done with a Matrix implementation
+% But as recommended by Ng, we start with a loop
+% The Maxtri implemetation is similar to the predict.m in ex3
+Cost = zeros(m, 1); % 5000 x 1
+DELTA1=zeros(size(Theta1));
+DELTA2=zeros(size(Theta2));
+for i = 1:m 
+  a1 = [1; X(i, :)']; %401 x 1
+  z2 = Theta1 * a1; % 25 x 1
+  a2 = [1;sigmoid(z2)]; % 26 x 1
+  z3 = Theta2 * a2; % 10 x 1
+  a3 = sigmoid(z3); % 10 x 1
+  h = a3; % 10 x 1
+  
+  % vectorize the sample output
+  yVeci = zeros(num_labels, 1); % 10 x 1
+  yVeci(y(i)) = 1;
+  
+  Cost(i) = - yVeci'*log(h) - (1-yVeci')*log(1-h); 
+ 
+  delta3 = a3 -yVeci; % 10 x 1
+  delta2 = (Theta2' * delta3).*sigmoidGradient([0;z2]); %26 x 1, computes delta2(1) anyway, just don't use it
+  DELTA2 = DELTA2 + delta3*a2'; % 10 x 26
+  DELTA1 = DELTA1 + delta2(2:hidden_layer_size+1)*a1'; %25 x 401
+  
+  
+end
+J = mean(Cost);
+Theta1_grad=DELTA1/m;
+Theta2_grad=DELTA2/m;
 
+% Now Add regulization, skipping the bias terms
+Theta1(:,1)=0; 
+Theta2(:,1)=0;
+J= J + lambda/(2*m)*(sum(Theta1(:).^2)+sum(Theta2(:).^2));
 
+GradientRegulization1= lambda/m*Theta1;
+GradientRegulization2= lambda/m*Theta2;
 
-
-
-
-
-
+Theta1_grad=Theta1_grad+GradientRegulization1;
+Theta2_grad=Theta2_grad+GradientRegulization2;
 
 
 
