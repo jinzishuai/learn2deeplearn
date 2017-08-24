@@ -21,10 +21,15 @@ grad = zeros(size(theta));
 
 
 
-
-
-
-
+% X: m x (n+1) where m is number of examples and n is the number of features
+% h, y: m x 1
+% theta: (n+1) x 1: theta(1) is the bias
+% grad: (n+1) x 1
+n = length(theta) -1; 
+h= X* theta;
+theta(1)=0; %avoid regularize on the bias team of theta(1)
+J=1/(2*m)*(sumsq(h-y)+lambda*sumsq(theta));
+grad=1/m*((X'*(h-y))+lambda*theta);
 
 
 
