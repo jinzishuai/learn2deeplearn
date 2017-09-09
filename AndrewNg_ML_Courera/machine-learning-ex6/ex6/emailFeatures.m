@@ -49,8 +49,12 @@ x = zeros(n, 1);
 %
 
 
-
-
+% method 1: simple loop, 3 lines
+%for i=1:length(word_indices)
+%  x(word_indices(i))=1;
+%end
+% method 2: single line
+x(word_indices)=1;
 
 
 
