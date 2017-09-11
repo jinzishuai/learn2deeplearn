@@ -26,7 +26,14 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
+for i=1:K
+  indexes=find(idx==i);
+  if length(indexes) > 0
+    centroids(i,:)=mean(X(idx==i,:));
+  else
+    fprintf("dropping cluter %d since no member is found", i);
+  end
+end
 
 
 
