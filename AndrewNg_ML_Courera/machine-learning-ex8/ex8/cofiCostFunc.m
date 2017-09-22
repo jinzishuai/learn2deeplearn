@@ -40,14 +40,30 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+diffMat=(X*Theta'-Y).^2; % num_movies x num_users
+J=sum(sum(R.*diffMat));
+J=J/2;
+
+% Gradients
+for i = 1:num_movies
+	idx=find(R(i,:)==1); % 1 x num_users_rates_movie_i
+	Theta_temp=Theta(idx,:); % num_users_rates_movie_i x num_features
+	Y_temp=Y(i,idx); % 1 x num_users_rates_movie_i
+	X_grad(i,:)=(X(i,:)*Theta_temp'-Y_temp)*Theta_temp;  % 1 x num_features
+end
+for j = 1:num_users
+	idx=find(R(:,j)==1); % 1 x num_movies_users_j_rated
+	Theta_temp=Theta(j,:); %  1 x num_features
+	Y_temp=Y(idx,j); % num_movies_users_j_rated x 1
+	%X(idx,:): num_movies_users_j_rated x num_features
+	Theta_grad(j,:)=(X(idx,:)*Theta_temp'-Y_temp)'* X(idx,:); % 1 x num_features 
+end
 
 
-
-
-
-
-
-
+%Add regulization
+J=J+lambda/2*(sum(sum(Theta.^2))+sum(sum(X.^2)));
+X_grad=X_grad+lambda*X;
+Theta_grad=Theta_grad+lambda*Theta;
 
 
 
