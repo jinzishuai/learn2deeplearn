@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Initialization
@@ -24,7 +24,7 @@ import sklearn.datasets
 from init_utils import sigmoid, relu, compute_loss, forward_propagation, backward_propagation
 from init_utils import update_parameters, predict, load_dataset, plot_decision_boundary, predict_dec
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 plt.rcParams['figure.figsize'] = (7.0, 4.0) # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
