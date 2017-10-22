@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Optimization Methods
@@ -26,7 +26,7 @@ from opt_utils import load_params_and_grads, initialize_parameters, forward_prop
 from opt_utils import compute_cost, predict, predict_dec, plot_decision_boundary, load_dataset
 from testCases import *
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 plt.rcParams['figure.figsize'] = (7.0, 4.0) # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
