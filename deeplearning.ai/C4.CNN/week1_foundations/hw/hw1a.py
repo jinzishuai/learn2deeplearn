@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Convolutional Neural Networks: Step by Step
@@ -36,13 +36,13 @@ import numpy as np
 import h5py
 import matplotlib.pyplot as plt
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 plt.rcParams['figure.figsize'] = (5.0, 4.0) # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
 
-get_ipython().magic('load_ext autoreload')
-get_ipython().magic('autoreload 2')
+#get_ipython().magic('load_ext autoreload')
+#get_ipython().magic('autoreload 2')
 
 np.random.seed(1)
 
@@ -112,7 +112,8 @@ def zero_pad(X, pad):
     """
     
     ### START CODE HERE ### (≈ 1 line)
-    X_pad = np.pad(X,((0,0),(pad,pad),(pad,pad),(0,0)),'constant', constant_values=((0,0),(0,0),(0,0),(0,0)))
+    #X_pad = np.pad(X,((0,0),(pad,pad),(pad,pad),(0,0)),'constant', constant_values=((0,0),(0,0),(0,0),(0,0)))
+    X_pad = np.pad(X,((0,0),(pad,pad),(pad,pad),(0,0)),'constant', constant_values=0)
     ### END CODE HERE ###
     
     return X_pad
