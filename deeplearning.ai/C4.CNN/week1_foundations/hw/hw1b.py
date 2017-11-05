@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Convolutional Neural Networks: Application
@@ -33,7 +33,7 @@ import tensorflow as tf
 from tensorflow.python.framework import ops
 from cnn_utils import *
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 np.random.seed(1)
 
 
