@@ -5,6 +5,13 @@
 ## Installation of Tensorflow on Ubuntu-16 
 https://github.com/jinzishuai/learn2deeplearn/wiki/Tensor-Flow-Installation-on-Ubuntu-14-16-without-GPU#python-3-with-pip-on-ubuntu-16
 
+## Installation of Keras on Ubuntu-16
+
+https://github.com/jinzishuai/learn2deeplearn/issues/30
+
+In additional, these dependent packages are needed to run the code used in the course
+> apt install python3-pydot
+
 # git tip to `chmod +x`
 
 ```
