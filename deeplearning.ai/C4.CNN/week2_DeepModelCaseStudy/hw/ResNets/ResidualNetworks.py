@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Residual Networks
@@ -31,7 +31,7 @@ from resnets_utils import *
 from keras.initializers import glorot_uniform
 import scipy.misc
 from matplotlib.pyplot import imshow
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 
 import keras.backend as K
 K.set_image_data_format('channels_last')
