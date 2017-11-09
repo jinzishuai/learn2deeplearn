@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Deep Learning & Art: Neural Style Transfer
@@ -24,7 +24,7 @@ from nst_utils import *
 import numpy as np
 import tensorflow as tf
 
-get_ipython().magic('matplotlib inline')
+#get_ipython().magic('matplotlib inline')
 
 
 # ## 1 - Problem Statement
