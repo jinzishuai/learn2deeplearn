@@ -10,7 +10,7 @@ https://github.com/jinzishuai/learn2deeplearn/wiki/Tensor-Flow-Installation-on-U
 https://github.com/jinzishuai/learn2deeplearn/issues/30
 
 In additional, these dependent packages are needed to run the code used in the course
-> apt install python3-pydot
+> apt install python3-pydot python3-pandas
 
 # git tip to `chmod +x`
 
