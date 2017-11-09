@@ -636,7 +636,9 @@ image_shape = (720., 1280.)
 
 # In[17]:
 
+print("Loading model")
 yolo_model = load_model("model_data/yolo.h5")
+print("Model loaded")
 
 
 # This loads the weights of a trained YOLO model. Here's a summary of the layers your model contains.
