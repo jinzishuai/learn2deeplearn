@@ -21,7 +21,7 @@ In additional, these dependent packages are needed to run the code used in the c
 * tensorflow
 ## Install Additional Python Libraries, Including Karas
 source ~/tensorflow/bin/activate
-> 
+> (tensorflow) seki@SafeHavens-MBP:~# pip install keras numpy matplotlib h5py scipy sklearn pydot pandas
 
 ## Get in and out of Virtualenv
 
