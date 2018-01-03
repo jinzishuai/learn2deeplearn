@@ -5,3 +5,7 @@ https://selfdrivingcars.mit.edu/
 
 * Tutorial: http://cars.mit.edu/deeptraffic
 * Simulation: http://cars.mit.edu/deeptrafficjs
+
+# Other Reinforce learning demos
+
+* [ConvNetJS Deep Q Learning Demo](http://cs.stanford.edu/people/karpathy/convnetjs/demo/rldemo.html)
