@@ -3,3 +3,8 @@ Reference https://medium.com/emergent-future/simple-reinforcement-learning-with-
 * [FrozenLake Environment in OpenAI gym](https://gym.openai.com/envs/FrozenLake-v0/)
 
 ## Installation of OpenAI gym
+### On Ubuntu-16.04
+
+```
+sudo pip install gym
+```
