@@ -8,3 +8,4 @@ Reference https://medium.com/emergent-future/simple-reinforcement-learning-with-
 ```
 sudo pip install gym
 ```
+Issue in request dependency: https://github.com/jinzishuai/learn2deeplearn/issues/39
