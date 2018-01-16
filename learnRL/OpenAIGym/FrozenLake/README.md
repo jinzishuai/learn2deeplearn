@@ -13,3 +13,26 @@ HFFG
 
 Note that this initial condition does not change between runs (ie, identical after every `env.reset()`).
 This problem does NOT require a solution policy that can deal with any initial condition. 
+
+## Q-Table
+```
+Q = np.zeros([env.observation_space.n,env.action_space.n])
+```
+it is of size 16 (number of cells) x 4 (number of actions).
+
+|State: Cell| Action 0: Up|Action 1: Down|Action 2: Left|Action 3: Right|
+|--|--|--|--|--|
+|0: (0,0)| | | | |
+|1: (0,1)| | | | |
+|2: (0,2)| | | | |
+|3: (0,3)| | | | |
+|4: (1,0)| | | | |
+...
+|15: (3, 3)| | | | |
+
+### Q-Value Update 
+```
+Q(s,a) = r + γ(max(Q(s’,a’)))
+```
+* r: reward of current state.  The reward at every step is 0, except for entering the goal, which provides a reward of 1.
+
