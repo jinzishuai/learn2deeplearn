@@ -32,7 +32,7 @@ it is of size 16 (number of cells) x 4 (number of actions).
 
 ### Q-Value Update 
 ```
-Q(s,a) = r + γ(max(Q(s’,a’))
+Q(s,a) = r + γ(max(Q(s’,a’)))
 ```
 * r: reward of current state.  The reward at every step is 0, except for entering the goal, which provides a reward of 1.
 
