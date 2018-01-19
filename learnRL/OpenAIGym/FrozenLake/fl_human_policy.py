@@ -4,13 +4,17 @@ import numpy as np
 env = gym.make('FrozenLake-v0')
 #Initialize table with all zeros
 X = -1
-policy=np.array([[1,3,0,2],
-        [1,X,1,X],
-        [3,1,1,X],
-        [X,3,3,X]])
+X = -1
+policy=np.array(
+        [[0, 3, 2, 3],
+         [0, X, 0, X],
+         [3, 1, 0, X],
+         [X, 2, 1, X]]
+        )
+
 policy=policy.flatten()
 # Set learning parameters
-num_episodes = 1000
+num_episodes = 1
 #create lists to contain total rewards and steps per episode
 #jList = []
 results = [0]*num_episodes
@@ -27,7 +31,9 @@ for i in range(num_episodes):
         j+=1
         #Get new state and reward from environment
         s1,r,d,_ = env.step(policy[s])
-        #env.render()
+        print(policy[s])
+        print("%d -> %s" % (s, s1))
+        env.render()
         s = s1
         if d == True:
             if r == 1.0:
