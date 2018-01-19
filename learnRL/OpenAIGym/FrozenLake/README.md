@@ -47,3 +47,4 @@ The policy would be based on the Q-table: `np.argmax(Q,axis=1).reshape(4,4)`
 | X | 2 | 2 | X |
 ```
 X means it does not matter.
+Note that this policy only works for the "non-slippery" setup. In this original problem, it is a very BAD policy. See https://github.com/jinzishuai/learn2deeplearn/issues/40 for details.
