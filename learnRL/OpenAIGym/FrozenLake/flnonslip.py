@@ -1,15 +1,22 @@
 #!/usr/bin/python2.7
 import gym
 import numpy as np
-env = gym.make('FrozenLake-v0')
+from gym.envs.registration import register
+register(
+    id='FrozenLakeNotSlippery-v0',
+    entry_point='gym.envs.toy_text:FrozenLakeEnv',
+    kwargs={'map_name' : '4x4', 'is_slippery': False},
+    max_episode_steps=100,
+    reward_threshold=0.78, # optimum = .8196
+)
+env = gym.make('FrozenLakeNotSlippery-v0')
 #Initialize table with all zeros
 X = -1
-X = -1
 policy=np.array(
-        [[0, 3, 3, 3],
-         [0, X, 0, X],
-         [3, 1, 0, X],
-         [X, 2, 1, X]]
+        [[1, 2, 2, 0],
+         [1, X, 1, X],
+         [2, 1, 1, X],
+         [X, 2, 2, X]]
         )
 
 policy=policy.flatten()
@@ -30,8 +37,8 @@ for i in range(num_episodes):
     while j < 99:
         j+=1
         #Get new state and reward from environment
-        #env.render()
         s1,r,d,_ = env.step(policy[s])
+        #print(policy[s])
         #print("%d -> %s" % (s, s1))
         #env.render()
         s = s1
@@ -41,6 +48,7 @@ for i in range(num_episodes):
             else:
                 results[i]=0
 
+            print("episod %d finishes in %d steps with result=%d" % (i, j, results[i]) )
             break
 
 #print(results)
