@@ -2,6 +2,8 @@
 import gym
 env = gym.make('FrozenLake-v0')
 env.reset()
+print("%s observations" % env.observation_space)
+print("%s actions" % env.action_space)
 
 env.render()
 for _ in range(3):

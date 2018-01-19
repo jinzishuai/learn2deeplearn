@@ -7,7 +7,7 @@ Q = np.zeros([env.observation_space.n,env.action_space.n])
 # Set learning parameters
 lr = .8
 y = .95
-num_episodes = 2000
+num_episodes = 20000
 #create lists to contain total rewards and steps per episode
 #jList = []
 rList = []
@@ -35,6 +35,8 @@ for i in range(num_episodes):
         if d == True:
             break
     #jList.append(j)
-    if rAll > 0:
-        print("episode %d finishes with rAll=%f > 0" % (i, rAll))
+    #if rAll > 0:
+        #print("episode %d finishes with rAll=%f > 0" % (i, rAll))
     rList.append(rAll)
+print("In the end, Q=%s" % Q)
+print("The policy is argmax(Q)=%s" % np.argmax(Q,axis=1).reshape(4,4))
