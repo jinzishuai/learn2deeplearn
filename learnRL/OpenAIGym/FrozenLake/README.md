@@ -20,7 +20,7 @@ Q = np.zeros([env.observation_space.n,env.action_space.n])
 ```
 it is of size 16 (number of cells) x 4 (number of actions).
 
-|State: Cell| Action 0: Up|Action 1: Down|Action 2: Left|Action 3: Right|
+|State: Cell| Action 0: Left|Action 1: Down|Action 2: Right|Action 3: Up|
 |--|--|--|--|--|
 |0: (0,0)| | | | |
 |1: (0,1)| | | | |
