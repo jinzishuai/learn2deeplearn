@@ -26,3 +26,7 @@ policy=np.array(
 ```
 ## Human Picked Choices
 It seems that the choices I manually made perform very badly. This might be because the chances of moving in my chosen direction is low.
+
+## Best Results on OpenAMI
+
+See [stickzman](./stickzman)
