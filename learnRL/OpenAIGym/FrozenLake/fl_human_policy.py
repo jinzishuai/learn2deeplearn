@@ -7,14 +7,14 @@ X = -1
 X = -1
 policy=np.array(
         [[0, 3, 3, 3],
-         [0, X, 0, X],
+         [0, X, 2, X],
          [3, 1, 0, X],
          [X, 2, 1, X]]
         )
-
+print("policy=\n%s\n" % policy)
 policy=policy.flatten()
 # Set learning parameters
-num_episodes = 1000
+num_episodes = 10000
 #create lists to contain total rewards and steps per episode
 #jList = []
 results = [0]*num_episodes
