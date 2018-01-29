@@ -6,7 +6,7 @@ env = gym.make('FrozenLake-v0')
 X = -1
 X = -1
 policy=np.array(
-        [[0, 3, 3, 3],
+        [[0, 3, 0, 0],
          [0, X, 2, X],
          [3, 1, 0, X],
          [X, 2, 1, X]]
