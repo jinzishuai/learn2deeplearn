@@ -10,6 +10,10 @@ Then we can run the test code of [CartPole/cp_random.py](CartPole/cp_random.py) 
 * Issue in request dependency: https://github.com/jinzishuai/learn2deeplearn/issues/39
 
 ### On Windows 10 with Python3.6
+To build all, 
 ```
 C:\Users\ShiJin>pip3 install gym[all]
 ```
+but it would fail since we don't have tools like `cmake` installed
+
+This works: `C:\Users\ShiJin>pip3 install gym`
