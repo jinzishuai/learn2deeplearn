@@ -48,3 +48,7 @@ The policy would be based on the Q-table: `np.argmax(Q,axis=1).reshape(4,4)`
 ```
 X means it does not matter.
 Note that this policy only works for the "non-slippery" setup. In this original problem, it is a very BAD policy. See https://github.com/jinzishuai/learn2deeplearn/issues/40 for details.
+
+## stickzman's code as the best solution in OpenAI so far
+
+https://github.com/stickzman/honors_thesis/tree/master/Q-Value
