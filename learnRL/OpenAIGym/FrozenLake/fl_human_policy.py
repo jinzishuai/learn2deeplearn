@@ -6,15 +6,15 @@ env = gym.make('FrozenLake-v0')
 X = -1
 X = -1
 policy=np.array(
-        [[0, 3, 0, 0],
-         [0, X, 2, X],
+        [[0, 3, 3, 3],
+         [0, X, 0, X],
          [3, 1, 0, X],
          [X, 2, 1, X]]
         )
 print("policy=\n%s\n" % policy)
 policy=policy.flatten()
 # Set learning parameters
-num_episodes = 10000
+num_episodes = 100
 #create lists to contain total rewards and steps per episode
 #jList = []
 results = [0]*num_episodes
@@ -27,6 +27,7 @@ for i in range(num_episodes):
     d = False
     j = 0
     #The Q-Table learning algorithm
+    results[i]=0
     while j < 99:
         j+=1
         #Get new state and reward from environment
@@ -38,9 +39,6 @@ for i in range(num_episodes):
         if d == True:
             if r == 1.0:
                 results[i]=1
-            else:
-                results[i]=0
-
             break
 
 #print(results)
