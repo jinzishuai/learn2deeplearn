@@ -597,7 +597,7 @@ def lstm_forward(x, a0, parameters):
     y -- Predictions for every time-step, numpy array of shape (n_y, m, T_x)
     caches -- tuple of values needed for the backward pass, contains (list of all the caches, x)
     """
-c
+
     # Initialize "caches", which will track the list of all the caches
     caches = []
     
@@ -1139,7 +1139,7 @@ print("gradients[\"dba\"].shape =", gradients["dba"].shape)
 # 
 # **Exercise:** Implement `lstm_cell_backward` by implementing equations $7-17$ below. Good luck! :)
 
-# In[ ]:
+# In[106]:
 
 def lstm_cell_backward(da_next, dc_next, cache):
     """
@@ -1170,20 +1170,21 @@ def lstm_cell_backward(da_next, dc_next, cache):
     
     ### START CODE HERE ###
     # Retrieve dimensions from xt's and a_next's shape (≈2 lines)
-    n_x, m = None
-    n_a, m = None
+    n_x, m = xt.shape
+    n_a, m = a_next.shape
     
     # Compute gates related derivatives, you can find their values can be found by looking carefully at equations (7) to (10) (≈4 lines)
-    dot = None
-    dcct = None
-    dit = None
-    dft = None
+    dot = da_next*np.tanh(c_next)*ot*(1-ot)
+    dcct =ot*(1-np.power(np.tanh(c_next),2))*it*da_next*cct*(1-np.power(np.tanh(cct),2))
+    dit = ot*(1-np.power(np.tanh(c_next),2))*cct*da_next*it*(1-it)
+    dft = ot*(1-np.power(np.tanh(c_next),2))*c_prev*da_next*ft*(1-ft)
     
-    # Code equations (7) to (10) (≈4 lines)
-    dit = None
-    dft = None
-    dot = None
-    dcct = None
+    #ref: https://www.coursera.org/learn/nlp-sequence-models/discussions/all/threads/WKmhmAnmEei9fxJIFDGH1A
+   # Code equations (7) to (10) (≈4 lines)
+    dit = dc_next*cct + dit
+    dft = dc_next*c_pre + dft
+    dot = dot
+    dcct = dc_next*it + dcct
 
     # Compute parameters related derivatives. Use equations (11)-(14) (≈8 lines)
     dWf = None
