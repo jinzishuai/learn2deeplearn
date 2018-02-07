@@ -454,7 +454,7 @@ def lstm_cell_forward(xt, a_prev, c_prev, parameters):
     return a_next, c_next, yt_pred, cache
 
 
-# In[7]:
+# In[16]:
 
 np.random.seed(1)
 xt = np.random.randn(3,10)
@@ -930,7 +930,7 @@ print("gradients[\"dba\"].shape =", gradients["dba"].shape)
 # 
 # Implement the `rnn_backward` function. Initialize the return variables with zeros first and then loop through all the time steps while calling the `rnn_cell_backward` at each time timestep, update the other variables accordingly.
 
-# In[16]:
+# In[12]:
 
 def rnn_backward(da, caches):
     """
@@ -990,7 +990,7 @@ def rnn_backward(da, caches):
     return gradients
 
 
-# In[17]:
+# In[13]:
 
 np.random.seed(1)
 x = np.random.randn(3,10,4)
@@ -1139,7 +1139,7 @@ print("gradients[\"dba\"].shape =", gradients["dba"].shape)
 # 
 # **Exercise:** Implement `lstm_cell_backward` by implementing equations $7-17$ below. Good luck! :)
 
-# In[59]:
+# In[35]:
 
 def lstm_cell_backward(da_next, dc_next, cache):
     """
@@ -1175,16 +1175,16 @@ def lstm_cell_backward(da_next, dc_next, cache):
     
     # Compute gates related derivatives, you can find their values can be found by looking carefully at equations (7) to (10) (≈4 lines)
     dot = da_next*np.tanh(c_next)*ot*(1-ot)
-    dcct= ot*(1-np.power(np.tanh(c_next),2))*it*da_next*cct*(1-np.power(np.tanh(cct),2))
-    dit = ot*(1-np.power(np.tanh(c_next),2))*cct*da_next*it*(1-it)
-    dft = ot*(1-np.power(np.tanh(c_next),2))*c_prev*da_next*ft*(1-ft)
+    dcct= dc_next*it + ot*(1-np.power(np.tanh(c_next),2))*it*da_next
+    dit = dc_next*cct + ot*(1-np.power(np.tanh(c_next),2))*cct*da_next
+    dft = dc_next*c_prev +ot*(1-np.power(np.tanh(c_next),2))*c_prev*da_next
     
     #ref: https://www.coursera.org/learn/nlp-sequence-models/discussions/all/threads/WKmhmAnmEei9fxJIFDGH1A
     # Code equations (7) to (10) (≈4 lines)
-    dit = dc_next*cct + dit
-    dft = dc_next*c_prev + dft
+    dit =  dit*it*(1-it)
+    dft =dft*ft*(1-ft)
     dot = dot
-    dcct = dc_next*it + dcct
+    dcct =  dcct*(1-cct*cct)
 
     # Compute parameters related derivatives. Use equations (11)-(14) (≈8 lines)
     concat = np.zeros((n_a+n_x, m))
@@ -1212,7 +1212,7 @@ def lstm_cell_backward(da_next, dc_next, cache):
     return gradients
 
 
-# In[60]:
+# In[36]:
 
 np.random.seed(1)
 xt = np.random.randn(3,10)
