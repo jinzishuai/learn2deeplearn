@@ -374,7 +374,7 @@ print("list of sampled characters:", [ix_to_char[i] for i in indices])
 #     return parameters
 # ```
 
-# In[ ]:
+# In[30]:
 
 # GRADED FUNCTION: optimize
 
@@ -408,23 +408,23 @@ def optimize(X, Y, a_prev, parameters, learning_rate = 0.01):
     ### START CODE HERE ###
     
     # Forward propagate through time (≈1 line)
-    loss, cache = None
+    loss, cache = rnn_forward(X, Y, a_prev, parameters)
     
     # Backpropagate through time (≈1 line)
-    gradients, a = None
+    gradients, a = rnn_backward(X, Y, parameters, cache)
     
     # Clip your gradients between -5 (min) and 5 (max) (≈1 line)
-    gradients = None
+    gradients = clip(gradients, 5)
     
     # Update parameters (≈1 line)
-    parameters = None
+    parameters = update_parameters(parameters, gradients, learning_rate)
     
     ### END CODE HERE ###
     
     return loss, gradients, a[len(X)-1]
 
 
-# In[ ]:
+# In[31]:
 
 np.random.seed(1)
 vocab_size, n_a = 27, 100
@@ -516,7 +516,7 @@ print("a_last[4] =", a_last[4])
 # Note that we use: `index= j % len(examples)`, where `j = 1....num_iterations`, to make sure that `examples[index]` is always a valid statement (`index` is smaller than `len(examples)`).
 # The first entry of `X` being `None` will be interpreted by `rnn_forward()` as setting $x^{\langle 0 \rangle} = \vec{0}$. Further, this ensures that `Y` is equal to `X` but shifted one step to the left, and with an additional "\n" appended to signify the end of the dinosaur name. 
 
-# In[ ]:
+# In[32]:
 
 # GRADED FUNCTION: model
 
@@ -564,13 +564,13 @@ def model(data, ix_to_char, char_to_ix, num_iterations = 35000, n_a = 50, dino_n
         ### START CODE HERE ###
         
         # Use the hint above to define one training example (X,Y) (≈ 2 lines)
-        index = None
-        X = None
-        Y = None
+        index = j % len(examples)
+        X = [None] + [char_to_ix[ch] for ch in examples[index]] 
+        Y = X[1:] + [char_to_ix["\n"]]
         
         # Perform one optimization step: Forward-prop -> Backward-prop -> Clip -> Update parameters
         # Choose a learning rate of 0.01
-        curr_loss, gradients, a_prev = None
+        curr_loss, gradients, a_prev = optimize(X, Y, a_prev, parameters, learning_rate = 0.01)
         
         ### END CODE HERE ###
         
@@ -599,7 +599,7 @@ def model(data, ix_to_char, char_to_ix, num_iterations = 35000, n_a = 50, dino_n
 
 # Run the following cell, you should observe your model outputting random-looking characters at the first iteration. After a few thousand iterations, your model should learn to generate reasonable-looking names. 
 
-# In[ ]:
+# In[33]:
 
 parameters = model(data, ix_to_char, char_to_ix)
 
