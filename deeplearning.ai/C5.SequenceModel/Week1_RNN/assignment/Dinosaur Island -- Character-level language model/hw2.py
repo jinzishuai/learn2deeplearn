@@ -1,6 +1,8 @@
 
 # coding: utf-8
 
+from __future__ import print_function
+
 # # Character level language model - Dinosaurus land
 # 
 # Welcome to Dinosaurus Island! 65 million years ago, dinosaurs existed, and in this assignment they are back. You are in charge of a special task. Leading biology researchers are creating new breeds of dinosaurs and bringing them to life on earth, and your job is to give names to these dinosaurs. If a dinosaur does not like its name, it might go beserk, so choose wisely! 
@@ -628,7 +630,7 @@ parameters = model(data, ix_to_char, char_to_ix)
 
 # In[ ]:
 
-from __future__ import print_function
+
 from keras.callbacks import LambdaCallback
 from keras.models import Model, load_model, Sequential
 from keras.layers import Dense, Activation, Dropout, Input, Masking
