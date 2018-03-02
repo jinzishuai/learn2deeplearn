@@ -37,3 +37,14 @@ chmod +x Initialization.py
 git update-index --chmod=+x Initialization.py
 ```
 
+# Run Jupyter Notebook Locally
+## Installation
+
+```
+pip3 install jupyter
+```
+## Run
+```
+jupyter notebook 
+```
+Open the browswer of http://localhost:8888/
