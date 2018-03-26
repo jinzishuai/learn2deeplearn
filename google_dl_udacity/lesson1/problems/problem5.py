@@ -59,15 +59,6 @@ unique_train_labels = train_labels[indices]
 
 look_for_duplicates (np.concatenate((train_dataset,valid_dataset,test_dataset)))
 
-#num_train_samples = train_dataset.shape[0]
-#print("dataset type is", type(train_dataset) )
-#sample = np.random.random_integers(num_train_samples)
-#data0=train_dataset[sample,:,:]
-#label0=train_labels[sample]
 
-#print("sample data-index=%d: label=%s (result-index=%s)" % (sample, letters[label0],label0))
-#plt.imshow(data0)
-#plt.show()
-#print(data0.shape)
 
 

@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>359c2afc-7d4d-4aec-a9fe-536721f5bca5</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>problem5.py</StartupFile>
+    <StartupFile>problem6.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="data.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="problem6.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="problem5.py" />
