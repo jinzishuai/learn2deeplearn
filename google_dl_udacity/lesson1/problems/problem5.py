@@ -38,7 +38,7 @@ def sort4images(mytest):
     return sorted, indices
 
 letters=np.array(['A', 'B', 'C','D','E','F','G','H','I','J'])
-train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = data.load_all_data_from_single_pickle_file('../notMNIST.pickle')
+train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = data.load_all_data_from_single_pickle_file('../../notMNIST.pickle')
 # sort the train_set
 #print('my test results are',letters[train_labels[0:4]])
 #sorted, indices = sort4images(train_dataset[0:4,:,:])

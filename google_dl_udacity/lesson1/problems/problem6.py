@@ -5,7 +5,7 @@ from sklearn import  linear_model
 import data
 
 letters=np.array(['A', 'B', 'C','D','E','F','G','H','I','J'])
-train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = data.load_all_data_from_single_pickle_file('../notMNIST.pickle')
+train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = data.load_all_data_from_single_pickle_file('../../notMNIST.pickle')
 
 for n in [50, 100, 1000, 5000]:
     testrange=range(n)
