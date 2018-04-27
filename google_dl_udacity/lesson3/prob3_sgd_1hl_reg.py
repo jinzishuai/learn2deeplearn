@@ -76,8 +76,9 @@ print('Test set', test_dataset.shape, test_labels.shape)
 
 batch_size = 128
 num_hidden_nodes = 1024
-beta = 1
+beta = 1e-3
 num_steps = 3001
+keep_rate = 0.5
 
 graph = tf.Graph()
 with graph.as_default():
@@ -101,7 +102,9 @@ with graph.as_default():
   # Training computation.
   hidden_layer = tf.matmul(tf_train_dataset, weights1) + biases1
   activated_hidden_layer = tf.nn.relu(hidden_layer)
-  logits = tf.matmul(activated_hidden_layer, weights2) + biases2
+  dropout = tf.nn.dropout(activated_hidden_layer, keep_rate) #dropout if applied after activation
+  logits = tf.matmul(dropout, weights2) + biases2 
+  #Note that we don't apply dropout for the last layer
   loss = tf.reduce_mean(
     tf.nn.softmax_cross_entropy_with_logits(labels=tf_train_labels, logits=logits))+ \
     tf.scalar_mul(beta, tf.nn.l2_loss(weights1)+tf.nn.l2_loss(weights2))
@@ -120,7 +123,8 @@ with tf.Session(graph=graph) as session:
   for step in range(num_steps):
     # Pick an offset within the training data, which has been randomized.
     # Note: we could use better randomization across epochs.
-    offset = (step * batch_size) % (train_labels.shape[0] - batch_size)
+    offset = 0 #(step * batch_size) % (train_labels.shape[0] - batch_size)
+
     # Generate a minibatch.
     batch_data = train_dataset[offset:(offset + batch_size), :]
     batch_labels = train_labels[offset:(offset + batch_size), :]
@@ -136,6 +140,6 @@ with tf.Session(graph=graph) as session:
       print("Validation accuracy: %.1f%%" % accuracy(
         valid_prediction.eval(), valid_labels))
   print('#############################')
-  print("Test accuracy: %.1f%% with beta=%f" % (accuracy(test_prediction.eval(), test_labels), beta))
+  print("Test accuracy: %.1f%% with beta=%f, keep_rate =%f" % (accuracy(test_prediction.eval(), test_labels), beta,keep_rate))
 
 
