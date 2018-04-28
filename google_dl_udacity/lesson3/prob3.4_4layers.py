@@ -75,11 +75,12 @@ print('Test set', test_dataset.shape, test_labels.shape)
 
 
 batch_size = 128
-num_hidden_nodes1 = 1024
-num_hidden_nodes2 = 1024
-beta = 1e-3
+num_hidden_nodes1 = 256
+num_hidden_nodes2 = 512
+beta = 0.001
 num_steps = 3001
-keep_rate = 0.5
+keep_rate = 1
+learning_rate=1e-3
 
 graph = tf.Graph()
 with graph.as_default():
@@ -96,13 +97,15 @@ with graph.as_default():
   weights1 = tf.Variable(
     tf.truncated_normal([image_size * image_size, num_hidden_nodes1]))
   biases1 = tf.Variable(tf.zeros([num_hidden_nodes1]))
-  weights2 = tf.Variable(
-    tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2]))
+  weights2 = tf.Variable(tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2]))
   biases2 = tf.Variable(tf.zeros([num_hidden_nodes2]))
   weights3 = tf.Variable(
     tf.truncated_normal([num_hidden_nodes2, num_labels]))
   biases3 = tf.Variable(tf.zeros([num_labels]))
   
+  #global_step = tf.Variable(0)  # count the number of steps taken.
+  #learning_rate = tf.train.exponential_decay(0.001, global_step, 100, 0.95)
+
   # Training computation.
   hidden_layer1 = tf.matmul(tf_train_dataset, weights1) + biases1
   activated_hidden_layer1 = tf.nn.relu(hidden_layer1)
@@ -119,7 +122,7 @@ with graph.as_default():
     tf.scalar_mul(beta, tf.nn.l2_loss(weights1) + tf.nn.l2_loss(weights2) + tf.nn.l2_loss(weights3))
   
   # Optimizer.
-  optimizer = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
+  optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
   
   # Predictions for the training, validation, and test data.
   train_prediction = tf.nn.softmax(logits)
@@ -148,13 +151,13 @@ with tf.Session(graph=graph) as session:
     feed_dict = {tf_train_dataset : batch_data, tf_train_labels : batch_labels}
     _, l, predictions = session.run(
       [optimizer, loss, train_prediction], feed_dict=feed_dict)
-    #if (step % 500 == 0):
-    if (step % 1 == 0):
-      print("Minibatch loss at step %d: %f" % (step, l))
+    if (step % 500 == 0):
+      print("Minibatch loss at step %d: %f. learning_rate=%f" % (step, l, learning_rate))
       print("Minibatch accuracy: %.1f%%" % accuracy(predictions, batch_labels))
       print("Validation accuracy: %.1f%%" % accuracy(
         valid_prediction.eval(), valid_labels))
   print('#############################')
-  print("Test accuracy: %.1f%% with beta=%f, keep_rate =%f" % (accuracy(test_prediction.eval(), test_labels), beta,keep_rate))
+  print("Test accuracy: %.1f%% with beta=%f, keep_rate =%f" % \
+     (accuracy(test_prediction.eval(), test_labels), beta,keep_rate))
 
 
