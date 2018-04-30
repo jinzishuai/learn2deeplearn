@@ -79,8 +79,8 @@ num_hidden_nodes1 = 1024
 num_hidden_nodes2 = 1024
 num_hidden_nodes3 = 305
 num_hidden_nodes4 = 75
-beta = 0.03
-num_steps = 3001
+beta = 0
+num_steps = 95001
 keep_rate = 0.75
 #learning_rate=1e-4
 
