@@ -82,7 +82,7 @@ num_hidden_nodes4 = 75
 beta = 0.03
 num_steps = 3001
 keep_rate = 0.75
-learning_rate=1e-4
+#learning_rate=1e-4
 
 graph = tf.Graph()
 with graph.as_default():
@@ -96,15 +96,15 @@ with graph.as_default():
   tf_test_dataset = tf.constant(test_dataset)
   
   # Variables.
-  weights1 = tf.Variable(tf.truncated_normal([image_size * image_size, num_hidden_nodes1], stddev=np.sqrt(1/(num_hidden_nodes1*image_size * image_size))))
+  weights1 = tf.Variable(tf.truncated_normal([image_size * image_size, num_hidden_nodes1], stddev=np.sqrt(2/(image_size * image_size))))
   biases1 = tf.Variable(tf.zeros([num_hidden_nodes1]))
-  weights2 = tf.Variable(tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2], stddev=np.sqrt(1/(num_hidden_nodes1*num_hidden_nodes2))))
+  weights2 = tf.Variable(tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2], stddev=np.sqrt(2/(num_hidden_nodes1))))
   biases2 = tf.Variable(tf.zeros([num_hidden_nodes2]))
-  weights3 = tf.Variable(tf.truncated_normal([num_hidden_nodes2, num_hidden_nodes3], stddev=np.sqrt(1/(num_hidden_nodes2*num_hidden_nodes3))))
+  weights3 = tf.Variable(tf.truncated_normal([num_hidden_nodes2, num_hidden_nodes3], stddev=np.sqrt(2/(num_hidden_nodes2))))
   biases3 = tf.Variable(tf.zeros([num_hidden_nodes3]))
-  weights4 = tf.Variable(tf.truncated_normal([num_hidden_nodes3, num_hidden_nodes4], stddev=np.sqrt(1/(num_hidden_nodes3*num_hidden_nodes4))))
+  weights4 = tf.Variable(tf.truncated_normal([num_hidden_nodes3, num_hidden_nodes4], stddev=np.sqrt(2/(num_hidden_nodes3))))
   biases4 = tf.Variable(tf.zeros([num_hidden_nodes4]))
-  weights5 = tf.Variable(tf.truncated_normal([num_hidden_nodes4, num_labels], stddev=np.sqrt(1/(num_labels*num_hidden_nodes4))))
+  weights5 = tf.Variable(tf.truncated_normal([num_hidden_nodes4, num_labels], stddev=np.sqrt(2/(num_hidden_nodes4))))
   biases5 = tf.Variable(tf.zeros([num_labels]))
   
   #global_step = tf.Variable(0)  # count the number of steps taken.
@@ -134,7 +134,9 @@ with graph.as_default():
     tf.scalar_mul(beta, tf.nn.l2_loss(weights1) + tf.nn.l2_loss(weights2) + tf.nn.l2_loss(weights3) + tf.nn.l2_loss(weights4) + tf.nn.l2_loss(weights5)) 
   
   # Optimizer.
-  optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
+  global_step = tf.Variable(0)  # count the number of steps taken.
+  learning_rate = tf.train.exponential_decay(0.3, global_step, 3500, 0.86, staircase=True)
+  optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)
   
   # Predictions for the training, validation, and test data.
   train_prediction = tf.nn.softmax(logits)
@@ -163,7 +165,7 @@ with tf.Session(graph=graph) as session:
     _, l, predictions = session.run(
       [optimizer, loss, train_prediction], feed_dict=feed_dict)
     if (step % 500 == 0):
-      print("Minibatch loss at step %d: %f. learning_rate=%f" % (step, l, learning_rate))
+      print("Minibatch loss at step %d: %f. learning_rate=%f" % (step, l, learning_rate.eval()))
       print("Minibatch accuracy: %.1f%%" % accuracy(predictions, batch_labels))
       #print("Validation accuracy: %.1f%%" % accuracy(valid_prediction.eval(), valid_labels))
   print('#############################')
