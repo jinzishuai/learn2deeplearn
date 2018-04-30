@@ -79,9 +79,9 @@ num_hidden_nodes1 = 1024
 num_hidden_nodes2 = 1024
 num_hidden_nodes3 = 305
 num_hidden_nodes4 = 75
-beta = 0.001
+beta = 0.03
 num_steps = 3001
-keep_rate = 1
+keep_rate = 0.75
 learning_rate=1e-4
 
 graph = tf.Graph()
@@ -96,17 +96,15 @@ with graph.as_default():
   tf_test_dataset = tf.constant(test_dataset)
   
   # Variables.
-  weights1 = tf.Variable(
-    tf.truncated_normal([image_size * image_size, num_hidden_nodes1]))
+  weights1 = tf.Variable(tf.truncated_normal([image_size * image_size, num_hidden_nodes1], stddev=np.sqrt(1/(num_hidden_nodes1*image_size * image_size))))
   biases1 = tf.Variable(tf.zeros([num_hidden_nodes1]))
-  weights2 = tf.Variable(tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2]))
+  weights2 = tf.Variable(tf.truncated_normal([num_hidden_nodes1, num_hidden_nodes2], stddev=np.sqrt(1/(num_hidden_nodes1*num_hidden_nodes2))))
   biases2 = tf.Variable(tf.zeros([num_hidden_nodes2]))
-  weights3 = tf.Variable(tf.truncated_normal([num_hidden_nodes2, num_hidden_nodes3]))
+  weights3 = tf.Variable(tf.truncated_normal([num_hidden_nodes2, num_hidden_nodes3], stddev=np.sqrt(1/(num_hidden_nodes2*num_hidden_nodes3))))
   biases3 = tf.Variable(tf.zeros([num_hidden_nodes3]))
-  weights4 = tf.Variable(tf.truncated_normal([num_hidden_nodes3, num_hidden_nodes4]))
+  weights4 = tf.Variable(tf.truncated_normal([num_hidden_nodes3, num_hidden_nodes4], stddev=np.sqrt(1/(num_hidden_nodes3*num_hidden_nodes4))))
   biases4 = tf.Variable(tf.zeros([num_hidden_nodes4]))
-  weights5 = tf.Variable(
-    tf.truncated_normal([num_hidden_nodes4, num_labels]))
+  weights5 = tf.Variable(tf.truncated_normal([num_hidden_nodes4, num_labels], stddev=np.sqrt(1/(num_labels*num_hidden_nodes4))))
   biases5 = tf.Variable(tf.zeros([num_labels]))
   
   #global_step = tf.Variable(0)  # count the number of steps taken.
